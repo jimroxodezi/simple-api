@@ -3,19 +3,21 @@ const express = require('express');
 const router = express.Router();
 
 
-router.get(`/`, function (req, res) {
+router.get("/", (req, res) => {
+	console.log("get request to users");
 	res.status(200).json({msg: `It's a GET request.\r`});
 });
 
-router.post(`/`, function (req, res) {
+router.post("/users", (req, res) => {
+	console.log("post request to users");
 	res.status(200).json({msg: `It's a POST request.\n`});
 });
 
-router.put(`/`, function (req, res) {
+router.put("/users", (req, res) => {
 	res.status(200).json({msg: `It's a PUT request.\n`});
 });
 
-router.delete(`/`, function (req, res) {
+router.delete("/users", (req, res) => {
 	res.status(200).json({msg: `It's a DELETE request.\n`});
 });
 
