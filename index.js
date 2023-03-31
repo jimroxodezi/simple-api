@@ -1,30 +1,6 @@
 const express = require('express');
 const { v4 } = require('uuid');
-const cors = require('cors')
-
-let users = {
-    1: {
-      id: v4(),
-      username: 'Robin Wieruch',
-    },
-    2: {
-      id: v4(),
-      username: 'Dave Davids',
-    },
-};
-  
-let messages = {
-    1: {
-      id: v4(),
-      text: 'Hello World',
-      userId: '1',
-    },
-    2: {
-      id: v4(),
-      text: 'By World',
-      userId: '2',
-    },
-};
+const cors = require('cors');
 
 const app = express();
 const PORT = 3000;
@@ -33,6 +9,12 @@ app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({extended: true}));
 
+// custom middleware
+app.use((req, res, next) => {
+    // console.log(Date.now());
+    req.me = users[1]
+    next();
+});
 
 app.get("/users", (req, res) => {
 	// console.log("get request to users");
@@ -74,12 +56,24 @@ app.post('/messages', (req, res) => {
     const message = {
       id,
       text: req.body.text,
+      userId: req.me.id
     };
     
     // add to our message object
     messages[id] = message;
     // send created message to our user.
     res.status(200).send(message);
+});
+
+app.delete('/messages/:messageId', (req, res) => {
+    const {
+      [req.params.messageId]: message,
+      ...otherMessages
+    } = messages;
+  
+    messages = otherMessages;
+  
+    return res.send(message);
 });
 
 app.listen(PORT, () => {
