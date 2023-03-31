@@ -2,6 +2,7 @@
 const express = require('express');
 const { v4 } = require('uuid');
 const router = express.Router();
+const { messages } = require("../models");
 
 router.get('/messages', (req, res) => {
     res.json(Object.values(messages));
@@ -36,4 +37,4 @@ router.delete('/messages/:messageId', (req, res) => {
     return res.send(message);
 });
 
-export default router;
+module.exports = router;
