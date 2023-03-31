@@ -1,25 +1,26 @@
 const express = require('express');
 const { v4 } = require('uuid');
+const cors = require('cors')
 
 let users = {
     1: {
-      id: '1',
+      id: v4(),
       username: 'Robin Wieruch',
     },
     2: {
-      id: '2',
+      id: v4(),
       username: 'Dave Davids',
     },
 };
   
 let messages = {
     1: {
-      id: '1',
+      id: v4(),
       text: 'Hello World',
       userId: '1',
     },
     2: {
-      id: '2',
+      id: v4(),
       text: 'By World',
       userId: '2',
     },
@@ -29,6 +30,8 @@ const app = express();
 const PORT = 3000;
 
 app.use(express.json());
+app.use(cors());
+app.use(express.urlencoded({extended: true}));
 
 
 app.get("/users", (req, res) => {
@@ -63,8 +66,21 @@ app.get('/messages', (req, res) => {
 });
   
 app.get('/messages/:messageId', (req, res) => {
-    return res.send(messages[req.params.messageId]);
-}); 
+    res.json(messages[req.params.messageId]);
+});
+
+app.post('/messages', (req, res) => {
+    const id = v4();
+    const message = {
+      id,
+      text: req.body.text,
+    };
+    
+    // add to our message object
+    messages[id] = message;
+    // send created message to our user.
+    res.status(200).send(message);
+});
 
 app.listen(PORT, () => {
     console.log("Server listening on port: %s", PORT);
