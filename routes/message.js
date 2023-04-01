@@ -1,18 +1,22 @@
 // importing packages
-const express = require('express');
-const { v4 } = require('uuid');
-const router = express.Router();
-const { messages } = require("../models");
+// const express = require('express');
+import express from "express";
+// const { v4 } = require('uuid');
+import { v4 } from "uuid"; 
+// const { messages } = require("../models");
+import { messages } from "../models/index.js";
 
-router.get('/messages', (req, res) => {
+const router = express.Router();
+
+router.get('/', (req, res) => {
     res.json(Object.values(messages));
 });
   
-router.get('/messages/:messageId', (req, res) => {
+router.get('/:messageId', (req, res) => {
     res.json(messages[req.params.messageId]);
 });
 
-router.post('/messages', (req, res) => {
+router.post('/', (req, res) => {
     const id = v4();
     const message = {
       id,
@@ -26,7 +30,7 @@ router.post('/messages', (req, res) => {
     res.status(200).send(message);
 });
 
-router.delete('/messages/:messageId', (req, res) => {
+router.delete('/:messageId', (req, res) => {
     const {
       [req.params.messageId]: message,
       ...otherMessages
@@ -37,4 +41,4 @@ router.delete('/messages/:messageId', (req, res) => {
     return res.send(message);
 });
 
-module.exports = router;
+export default router;
