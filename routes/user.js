@@ -1,13 +1,10 @@
-// const { users } = require("../models");
 import { users } from '../models/index.js';
 
-// const router = require('express').Router();
 import express from "express";
 
 const router = express.Router();
 
 router.get("/", (req, res) => {
-	// console.log("get request to users");
 	res.status(200).json(Object.values(users));
 });
 
@@ -16,7 +13,6 @@ router.get("/:userID/", (req, res) => {
 })
 
 router.post("/", (req, res) => {
-	// console.log("post request to users");
 	res.status(200).json({msg: `It's a POST request.\n`});
 });
 
@@ -33,4 +29,3 @@ router.post("/", (req, res) => {
 // });
 
 export default router;
-// module.exports = router;

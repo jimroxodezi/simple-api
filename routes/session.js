@@ -1,11 +1,10 @@
-// const express = require('express');
-import express from "express";
+// import express from "express";
+// import { users } from "../models/index.js";
 
-const router = express.Router();
+// const router = express.Router();
 
-router.get('/', (req, res) => {
-  res.send(req.models.users[req.me.id]);
-});
+// router.get('/', (req, res) => {
+//   res.send(users[req.me.id]);
+// });
 
-export default router;
-// module.exports = router;
+// export default router;

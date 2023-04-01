@@ -1,9 +1,5 @@
-// importing packages
-// const express = require('express');
 import express from "express";
-// const { v4 } = require('uuid');
 import { v4 } from "uuid"; 
-// const { messages } = require("../models");
 import { messages } from "../models/index.js";
 
 const router = express.Router();

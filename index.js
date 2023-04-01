@@ -1,11 +1,8 @@
-// const express = require('express');
 import express from "express";
-// const cors = require('cors');
 import cors from "cors";
-// const routes = require('./routes');
 import userRoutes from "./routes/user.js";
 import messageRoutes from "./routes/message.js";
-import sessionRoutes from "./routes/session.js"
+// import sessionRoutes from "./routes/session.js"
 
 const app = express();
 const PORT = 3000;
@@ -17,7 +14,7 @@ app.use(express.urlencoded({extended: true}));
 
 app.use("/users", userRoutes);
 app.use("/messages", messageRoutes);
-app.use("/session", sessionRoutes);
+// app.use("/session", sessionRoutes);
 
 
 app.listen(PORT, () => {
