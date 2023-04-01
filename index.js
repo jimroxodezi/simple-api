@@ -3,7 +3,9 @@ import express from "express";
 // const cors = require('cors');
 import cors from "cors";
 // const routes = require('./routes');
-import routes from "./routes/index.js";
+import userRoutes from "./routes/user.js";
+import messageRoutes from "./routes/message.js";
+import sessionRoutes from "./routes/session.js"
 
 const app = express();
 const PORT = 3000;
@@ -13,9 +15,9 @@ app.use(cors());
 app.use(express.urlencoded({extended: true}));
 
 
-app.use("/users", routes.user);
-app.use("/messages", routes.message);
-app.use("/session", routes.session);
+app.use("/users", userRoutes);
+app.use("/messages", messageRoutes);
+app.use("/session", sessionRoutes);
 
 
 app.listen(PORT, () => {
